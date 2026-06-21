@@ -71,9 +71,42 @@ and logic can break when a site redesigns. Before scraping any given roaster's s
 `robots.txt` and terms of service. This is the highest-maintenance, highest-risk part of the project,
 which is why it's explicitly decoupled (see above) rather than load-bearing for the app to function.
 
+## Core design decision: phase the project — archetype first, specific coffees later
+
+**The problem this solves:** seeding a real catalog of specific coffees turned out to be far harder
+than expected even for a one-time manual pass — most roaster websites load their product listings
+with JavaScript that simple scraping/fetching tools can't see, and the data that *is* reachable is
+fragmented and inconsistently fresh. Building a reliable catalog is genuinely a project of its own
+(see the scraper section above), and it shouldn't block the rest of the app from shipping.
+
+**The resolution:** split the product into two phases with different scopes, not two different
+products.
+
+- **Phase 1 (build now):** the quiz produces a **taste archetype** plus **general buying guidance**
+  — e.g. "look for washed Ethiopian or Colombian coffees, light roast, notes like jasmine or stone
+  fruit." This requires no catalog, no scraper, and nothing that can go stale, because it's
+  describing a *style*, not a specific in-stock product. This is a complete, shippable app on its
+  own — not a placeholder.
+- **Phase 2 (later, after Phase 1 ships):** layer specific, real coffee recommendations on top of
+  the archetype, sourced from the catalog described above (manually seeded at first, automated via
+  scraper + GitHub Actions eventually). This was originally roadmap step 7 ("stretch scraper
+  module") — it's unchanged in scope, just explicitly positioned as additive rather than a
+  blocker.
+
+This means the hardest, most failure-prone part of the project (live, current coffee data) is no
+longer load-bearing for getting anything real into users' hands.
+
+## Note on scraping technique (learned during Phase 1 research)
+
+Most specialty roasters run on Shopify. Shopify stores conventionally expose a `/products.json`
+endpoint with clean, structured product data (no JavaScript rendering required) — this is the
+likely foundation for the Phase 2 scraper, found while testing catalog-seeding approaches. Worth
+re-validating per roaster when Phase 2 starts, since not every store has this open and not every
+roaster uses Shopify.
+
 ## Open questions / not yet decided
 
 - Exact quiz questions and preference axes
-- Catalog schema (fields per coffee)
-- Which roasters to start with for manual seeding
-- Matching/scoring algorithm details
+- Archetype definitions and the buying-guidance text for each
+- Matching/scoring algorithm details (now: quiz answers → archetype, not yet: archetype → catalog)
+- Catalog schema and scraper approach — deferred to Phase 2

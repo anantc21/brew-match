@@ -13,19 +13,25 @@ data pipelines, scheduled automation, and shipping something other people can ac
 
 ## How it works (high level)
 
+**Phase 1 (building now):**
 1. User takes a short quiz in a web app (Streamlit)
 2. Quiz answers map to preference axes (acidity, body, roast level, adventurousness, etc.)
-3. Axes combine into an **archetype**
-4. Archetype is matched against a **catalog** of real coffees (scraped from roaster sites, refreshed on a schedule)
-5. User gets back: their archetype description + a short list of matching coffees with links to buy
+3. Axes combine into an **archetype**, shown along with general buying guidance (origins,
+   processes, roast levels, and flavor notes to look for)
+
+**Phase 2 (later, deferred):**
+4. The archetype is matched against a **catalog** of real, current coffees (scraped from roaster
+   sites, refreshed on a schedule)
+5. User also gets back a short list of specific matching coffees with links to buy
 
 ## Why this is harder than it sounds
 
-Roasters change their offerings constantly. A catalog scraped once goes stale fast. See
-[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for how this project handles that — short version:
-the catalog is built by a separate, scheduled scraper job (not live-scraped per user), and every
-recommendation shows a "last verified" date plus a direct link to the roaster so the user always
-has ground truth, not a stale promise.
+Roasters change their offerings constantly, and most roaster websites turned out to be difficult to
+reliably scrape for a one-time seed (JavaScript-rendered product pages, inconsistent site
+structures). Rather than let that block the whole project, Phase 1 ships without any real-coffee
+catalog at all — see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full reasoning behind
+this phased approach, and why a scraped catalog is deferred to Phase 2 rather than required up
+front.
 
 ## Project structure (planned)
 
