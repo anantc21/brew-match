@@ -2,15 +2,16 @@
 
 Tracks build order and progress. Update as steps complete.
 
-## Phase 1 — archetype + buying guidance (no catalog, no scraper)
+## Phase 1 — archetype + buying guidance (no catalog, no scraper) ✅ COMPLETE
 
 - [x] **1. Catalog schema** — _superseded: not needed for Phase 1, see Phase 2 below_
-- [ ] **2. Quiz design** — questions → preference axes → archetype definitions, plus the general
-      buying-guidance text for each archetype (origins/processes/roast levels/notes to look for)
-- [ ] **3. Matching logic** — score quiz answers against the axes, return the best-fit archetype
-- [ ] **4. Streamlit app** — quiz flow + results page showing archetype + buying guidance
-- [ ] **5. Deploy** — push to GitHub, deploy via Streamlit Community Cloud, get a public shareable
-      link, post it
+- [x] **2. Quiz design** — 10 questions across 5 preference axes, 7 archetypes with full buying
+      guidance (countries, regions, process, varieties, roast level, flavor notes, roasters)
+- [x] **3. Matching logic** — Euclidean distance scoring in `app/matching.py`; also contains
+      QUESTIONS list imported by the app
+- [x] **4. Streamlit app** — one-question-at-a-time quiz with Back/Next, progress bar, results
+      page with full archetype guidance in styled cards
+- [x] **5. Deploy** — live at https://brew-match.streamlit.app/
 
 ## Phase 2 — specific coffee recommendations (deferred until Phase 1 ships)
 
@@ -26,11 +27,16 @@ Tracks build order and progress. Update as steps complete.
 
 ## Milestone log
 
-_(Add an entry here each time a step above is completed — what was built, how it works, what was
-learned. This becomes the project's reference entry for the knowledge base doc.)_
-
-- Phase ordering decided: catalog-seeding research showed most roaster sites are hard to scrape
+- **Phase ordering decided:** catalog-seeding research showed most roaster sites are hard to scrape
   reliably (JavaScript-rendered product pages), so the original single-phase plan was split into
   Phase 1 (archetype only, ships fast, no stale-data risk) and Phase 2 (specific coffees, deferred
   until the scraper exists). See ARCHITECTURE.md for full reasoning.
 
+- **Phase 1 complete (June 2026):** shipped a fully working public quiz app at
+  https://brew-match.streamlit.app/. Users answer 10 multiple-choice questions across 5 preference
+  axes (roast, acidity, flavor, body, adventurousness), get matched to one of 7 archetypes via
+  Euclidean distance, and receive detailed buying guidance (countries, regions, process, varieties,
+  roast level, flavor notes, roasters). Built with Streamlit, deployed via Streamlit Community
+  Cloud, source on GitHub at github.com/anantc21/brew-match. Key learnings: Streamlit session
+  state for multi-page quiz flow, decoupling design from data, phasing a project to ship fast
+  without being blocked by the hardest parts.
