@@ -19,6 +19,129 @@ import math
 
 
 # ---------------------------------------------------------------------------
+# QUESTIONS
+# Each question is a dict with:
+#   - text:    the question shown to the user
+#   - axis:    which preference axis this question feeds into
+#   - options: list of (display_label, score) tuples, always 5 options
+#              ordered from most negative (-2) to most positive (+2)
+# ---------------------------------------------------------------------------
+
+QUESTIONS = [
+    {
+        "text": "When you imagine your ideal cup of coffee, what's the vibe?",
+        "axis": "roast",
+        "options": [
+            ("Light & delicate, tea-like", -2),
+            ("Light-medium", -1),
+            ("Balanced, middle of the road", 0),
+            ("Rich, medium-dark", 1),
+            ("Bold, dark, intense", 2),
+        ],
+    },
+    {
+        "text": "How strong or intense do you like your coffee to taste?",
+        "axis": "roast",
+        "options": [
+            ("Very mild & delicate", -2),
+            ("Somewhat mild", -1),
+            ("Medium strength", 0),
+            ("Fairly strong", 1),
+            ("Very strong & intense", 2),
+        ],
+    },
+    {
+        "text": "Do you enjoy tangy or tart flavors generally — citrus, tart fruit, lemonade?",
+        "axis": "acidity",
+        "options": [
+            ("Not at all, prefer smooth", -2),
+            ("Not really, prefer mild", -1),
+            ("Fine in moderation", 0),
+            ("Yes, I like some brightness", 1),
+            ("Love it, the tangier the better", 2),
+        ],
+    },
+    {
+        "text": "A coffee tastes \"sour\" to you — is that a dealbreaker?",
+        "axis": "acidity",
+        "options": [
+            ("Sourness ruins it for me", -2),
+            ("Mostly a turnoff", -1),
+            ("Depends on context", 0),
+            ("Not really bothered", 1),
+            ("Not at all, that's brightness!", 2),
+        ],
+    },
+    {
+        "text": "Pick a flavor you'd want to taste in your coffee:",
+        "axis": "flavor",
+        "options": [
+            ("Chocolate, nuts, or baking spice", -2),
+            ("Caramel leaning spiced or nutty", -1),
+            ("Caramel or vanilla, neutral", 0),
+            ("Mild fruit, apple, or light citrus", 1),
+            ("Bold berries, citrus, or floral", 2),
+        ],
+    },
+    {
+        "text": "Sweet treat pairing — pick one:",
+        "axis": "flavor",
+        "options": [
+            ("Brownie", -2),
+            ("Spiced cookie", -1),
+            ("Caramel flan", 0),
+            ("Citrus tart", 1),
+            ("Fresh berry tart", 2),
+        ],
+    },
+    {
+        "text": "Ideal coffee texture or mouthfeel?",
+        "axis": "body",
+        "options": [
+            ("Light, like tea", -2),
+            ("Light-medium", -1),
+            ("Medium", 0),
+            ("Medium-heavy", 1),
+            ("Thick, syrupy, coats your mouth", 2),
+        ],
+    },
+    {
+        "text": "Milk or no milk, normally?",
+        "axis": "body",
+        "options": [
+            ("Black, nothing added", -2),
+            ("Just a splash sometimes", -1),
+            ("A little milk regularly", 0),
+            ("Regular milk or cream", 1),
+            ("Latte or cream-heavy", 2),
+        ],
+    },
+    {
+        "text": "How do you feel about trying weird or experimental things in food or drink?",
+        "axis": "adventurousness",
+        "options": [
+            ("Like to know exactly what I'm getting", -2),
+            ("Rarely venture out", -1),
+            ("Open occasionally", 0),
+            ("Pretty open generally", 1),
+            ("Love it, bring on the unusual", 2),
+        ],
+    },
+    {
+        "text": "Have you ever intentionally ordered a coffee that sounded weird or unfamiliar?",
+        "axis": "adventurousness",
+        "options": [
+            ("No, and I wouldn't", -2),
+            ("No, probably wouldn't", -1),
+            ("Maybe once or twice", 0),
+            ("Yes, a few times", 1),
+            ("Yes, regularly — that's half the fun", 2),
+        ],
+    },
+]
+
+
+# ---------------------------------------------------------------------------
 # ARCHETYPES
 # Each archetype has:
 #   - profile: list of 5 axis scores [roast, acidity, flavor, body, adventurousness]
