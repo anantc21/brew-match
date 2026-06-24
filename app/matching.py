@@ -76,22 +76,22 @@ QUESTIONS = [
         "text": "Pick a flavor you'd want to taste in your coffee:",
         "axis": "flavor",
         "options": [
-            ("Chocolate, nuts, or baking spice", -2),
-            ("Caramel leaning spiced or nutty", -1),
-            ("Caramel or vanilla, neutral", 0),
-            ("Mild fruit, apple, or light citrus", 1),
             ("Bold berries, citrus, or floral", 2),
+            ("Mild fruit, apple, or light citrus", 1),
+            ("Caramel or vanilla, neutral", 0),
+            ("Caramel leaning spiced or nutty", -1),
+            ("Chocolate, nuts, or baking spice", -2),
         ],
     },
     {
         "text": "Sweet treat pairing — pick one:",
         "axis": "flavor",
         "options": [
-            ("Brownie", -2),
-            ("Spiced cookie", -1),
-            ("Caramel flan", 0),
-            ("Citrus tart", 1),
             ("Fresh berry tart", 2),
+            ("Citrus tart", 1),
+            ("Caramel flan", 0),
+            ("Spiced cookie", -1),
+            ("Brownie", -2),
         ],
     },
     {
@@ -276,6 +276,162 @@ ARCHETYPES = {
 
 
 # ---------------------------------------------------------------------------
+# GLOSSARY
+# Plain English explanations for coffee terms used in the results page.
+# Shown as small helper text next to each guidance field in the app.
+# ---------------------------------------------------------------------------
+
+GLOSSARY = {
+    "countries":    "The country where the coffee was grown. Origin has a huge impact on flavor — Ethiopia produces very different coffee than Brazil.",
+    "regions":      "Specific growing regions within a country. Like wine appellations — Yirgacheffe in Ethiopia is as specific and meaningful as Burgundy in France.",
+    "process":      "How the coffee cherry is processed after picking. Washed = clean and bright. Natural = fruit dried on, produces sweeter and fruitier flavors. Honey = in between.",
+    "varieties":    "The cultivar of coffee plant — like grape varieties in wine. Gesha is prized for floral complexity; Bourbon is a classic with balanced sweetness.",
+    "roast_level":  "How long the beans were roasted. Light roasts preserve more of the bean's original character — fruit, floral notes. Dark roasts develop bolder, more uniform flavors.",
+    "flavor_notes": "Descriptors on the bag tell you what flavors the roaster tastes. They're not added ingredients — they're naturally occurring compounds in the bean.",
+    "roasters":     "Roasters that specialize in this style. Buying from a roaster known for a style is a shortcut to consistently finding coffees you'll enjoy.",
+}
+
+
+
+
+# ---------------------------------------------------------------------------
+# VARIETY PROFILES
+# Plain English descriptions of each coffee variety/cultivar mentioned
+# across the archetypes. Shown on the results page when a user receives
+# that variety as a recommendation.
+# ---------------------------------------------------------------------------
+
+VARIETY_PROFILES = {
+    "Ethiopian Heirloom": (
+        "Ethiopia has thousands of wild and semi-wild coffee varieties that haven't "
+        "been formally classified — collectively called 'heirloom.' This genetic "
+        "diversity is why Ethiopian coffees are so complex and varied. When a bag "
+        "says 'Ethiopian Heirloom,' it means the exact variety is unknown or mixed, "
+        "but the result is often strikingly floral, fruity, and unlike anything grown "
+        "from a single named cultivar elsewhere."
+    ),
+    "SL28": (
+        "Developed in Kenya in the 1930s by Scott Laboratories (hence 'SL'). SL28 "
+        "is famous for producing some of the most intensely flavored coffees in the "
+        "world — blackcurrant, tomato, red fruit, and citrus with high acidity. "
+        "It's drought-tolerant but vulnerable to disease, which is why it's "
+        "increasingly rare. A bag listing SL28 is usually a signal of quality."
+    ),
+    "SL34": (
+        "A sibling of SL28, also developed by Scott Laboratories in Kenya. SL34 "
+        "thrives at higher rainfall and produces coffees with similar intensity — "
+        "blackcurrant, dark fruit, high acidity — but with slightly more body. "
+        "Often blended with SL28, and both together define the classic Kenyan flavor profile."
+    ),
+    "Gesha": (
+        "Originally from the Gesha village in Ethiopia, but made world-famous by "
+        "Hacienda La Esmeralda in Panama in the early 2000s. Gesha is prized above "
+        "almost all other varieties for its extraordinary floral complexity — jasmine, "
+        "bergamot, peach, tropical fruit. It commands some of the highest prices in "
+        "specialty coffee. If you see Gesha on a bag, expect something exceptional "
+        "and expect to pay for it."
+    ),
+    "Pink Bourbon": (
+        "A naturally occurring mutation of the Bourbon variety, named for its "
+        "distinctive pink-colored coffee cherries. Originally from Colombia's Huila "
+        "region. Pink Bourbon produces coffees with exceptional sweetness and "
+        "complexity — tropical fruit, floral notes, and a silky texture. It's become "
+        "one of the most sought-after varieties in the specialty world and scores "
+        "extremely well in competitions."
+    ),
+    "Sidra": (
+        "A relatively new and rare variety from Ecuador, believed to be a cross "
+        "between Ethiopian Heirloom and Bourbon. Sidra is prized for its extraordinary "
+        "cup quality — tropical fruit, floral notes, and wine-like complexity that "
+        "rivals Gesha. It's still uncommon and commands high prices, but is quickly "
+        "gaining a reputation as one of the most exciting varieties in specialty coffee."
+    ),
+    "Typica Mejorado": (
+        "A selection of the classic Typica variety developed in Ecuador for improved "
+        "cup quality. It produces coffees with a distinctive tropical fruit character — "
+        "mango, passion fruit, papaya — and is increasingly used by specialty roasters "
+        "for competition lots. 'Mejorado' means 'improved' in Spanish."
+    ),
+    "Caturra": (
+        "A natural mutation of Bourbon discovered in Brazil in the early 1900s. "
+        "Caturra is a workhorse variety — compact, high-yielding, and easy to farm — "
+        "that produces clean, bright, balanced coffees. It's widely grown in Colombia "
+        "and Central America. Not the flashiest variety, but reliably good and "
+        "representative of its origin's character."
+    ),
+    "Castillo": (
+        "Developed by Colombia's Cenicafé research center as a disease-resistant "
+        "alternative to Caturra. Castillo is controversial among coffee purists — "
+        "it's highly productive and resistant to coffee leaf rust, but some argue "
+        "it produces slightly less complex cups than older varieties. When well-farmed "
+        "and carefully processed, it produces excellent results."
+    ),
+    "Catuai": (
+        "A hybrid of Mundo Novo and Caturra developed in Brazil. Catuai is widely "
+        "planted across Latin America for its high yield and wind resistance. It "
+        "produces clean, balanced coffees — reliable rather than exciting. Red and "
+        "Yellow Catuai (named for cherry color) are both common and broadly similar "
+        "in cup profile."
+    ),
+    "Bourbon": (
+        "One of the oldest and most important arabica varieties, descended from plants "
+        "brought to Bourbon Island (now Réunion) from Yemen. Bourbon produces coffees "
+        "with classic sweetness — caramel, stone fruit, red apple — and good balance. "
+        "It's the ancestral variety for many modern cultivars (Pink Bourbon, Caturra, "
+        "Catuai). Red Bourbon is the most common; Yellow Bourbon is sweeter and "
+        "often found in Brazil."
+    ),
+    "Typica": (
+        "One of the oldest arabica varieties, and the genetic basis for most of the "
+        "world's arabica coffee. Typica produces clean, elegant cups with mild acidity "
+        "and a classic coffee sweetness. It's lower-yielding than modern hybrids, "
+        "which is why it's been largely replaced by more productive varieties — but "
+        "well-grown Typica from historic origins (Jamaica, Hawaii, Peru) can be "
+        "exceptional."
+    ),
+    "Yellow Bourbon": (
+        "A mutation of Bourbon with yellow-colored cherries instead of red, most "
+        "commonly found in Brazil. Yellow Bourbon tends to produce sweeter cups than "
+        "red Bourbon — caramel, hazelnut, honey — and is popular for natural and "
+        "pulped natural processing where the yellow fruit adds extra sweetness to "
+        "the drying process."
+    ),
+    "Red Catuai": (
+        "A Catuai variant with red-colored cherries, widely grown in Brazil and "
+        "Central America. Red Catuai produces balanced, chocolatey, low-acidity "
+        "coffees — reliable and food-friendly. It's a common base variety for "
+        "espresso blends due to its consistency and body."
+    ),
+    "Mundo Novo": (
+        "A natural cross between Typica and Bourbon, discovered in Brazil in the "
+        "1940s. Mundo Novo ('New World') is vigorous, disease-resistant, and "
+        "high-yielding. It produces full-bodied, chocolatey coffees with low acidity "
+        "— well-suited to medium and dark roasts and popular in Brazilian espresso blends."
+    ),
+    "Tim Tim": (
+        "A variety unique to Sumatra, Indonesia, also known as Timtim or Ateng. "
+        "It contributes to the distinctive earthy, herbal, full-bodied character "
+        "associated with Sumatran coffees. Tim Tim is particularly associated with "
+        "the wet-hulling process (Giling Basah) used in Sumatra, which amplifies "
+        "its rustic, low-acid profile."
+    ),
+    "Jember": (
+        "An Indonesian variety (also called S795) developed at the Jember research "
+        "station, used widely across Sumatra and other Indonesian islands. Jember "
+        "produces full-bodied, low-acid coffees with earthy and spicy notes. "
+        "Like Tim Tim, it's well-suited to the wet-hulling process and is commonly "
+        "found in Sumatran and Sulawesi lots."
+    ),
+    "espresso blends": (
+        "Not a variety — a blend of multiple origins and sometimes varieties, "
+        "formulated specifically for espresso. Blends are designed for consistency "
+        "and balance under pressure: typically low acidity, full body, chocolate or "
+        "caramel sweetness, and crema stability. Most large roasters have a house "
+        "espresso blend; specialty roasters often label theirs with the component origins."
+    ),
+}
+
+# ---------------------------------------------------------------------------
 # STEP 1: compute axis scores from 10 answers
 # ---------------------------------------------------------------------------
 
@@ -285,24 +441,22 @@ def compute_axis_scores(answers):
     a list of 5 axis scores, one per axis.
 
     Question-to-axis mapping (0-indexed):
-        Q1, Q2  → roast          (answers[0], answers[1])
-        Q3, Q4  → acidity        (answers[2], answers[3])
-        Q5, Q6  → flavor         (answers[4], answers[5])
-        Q7, Q8  → body           (answers[6], answers[7])
+        Q1, Q2  → roast           (answers[0], answers[1])
+        Q3, Q4  → acidity         (answers[2], answers[3])
+        Q5, Q6  → flavor          (answers[4], answers[5])
+        Q7, Q8  → body            (answers[6], answers[7])
         Q9, Q10 → adventurousness (answers[8], answers[9])
 
     Each axis score is the average of its two questions.
     Result is a list: [roast, acidity, flavor, body, adventurousness]
     """
 
-    # Validate — we need exactly 10 answers, each between -2 and +2
     if len(answers) != 10:
         raise ValueError(f"Expected 10 answers, got {len(answers)}")
     for i, answer in enumerate(answers):
         if answer not in [-2, -1, 0, 1, 2]:
             raise ValueError(f"Answer {i+1} must be -2, -1, 0, 1, or 2. Got: {answer}")
 
-    # Average each pair to get an axis score
     roast           = (answers[0] + answers[1]) / 2
     acidity         = (answers[2] + answers[3]) / 2
     flavor          = (answers[4] + answers[5]) / 2
@@ -320,61 +474,76 @@ def euclidean_distance(user_scores, archetype_profile):
     """
     Measures how far apart a user's axis scores are from one archetype's profile.
     Lower = closer match.
-
-    Euclidean distance across 5 dimensions:
-        sqrt( (u1-a1)^2 + (u2-a2)^2 + (u3-a3)^2 + (u4-a4)^2 + (u5-a5)^2 )
-
-    Think of it like measuring straight-line distance between two points,
-    but in 5-dimensional space (one dimension per axis) instead of 2D or 3D.
     """
-
-    # zip() pairs up corresponding values: user_scores[0] with archetype_profile[0], etc.
     squared_differences = [
         (user_val - archetype_val) ** 2
         for user_val, archetype_val in zip(user_scores, archetype_profile)
     ]
-
     return math.sqrt(sum(squared_differences))
 
 
 # ---------------------------------------------------------------------------
-# STEP 3: find the best matching archetype
+# STEP 3: confidence label based on distance
+# ---------------------------------------------------------------------------
+
+def get_confidence(distance):
+    """
+    Converts a raw Euclidean distance into a human-readable confidence label.
+
+    Thresholds (tuned for this 5-axis, -2 to +2 scale):
+        < 1.5   → Strong match
+        1.5–2.5 → Good match
+        > 2.5   → Mixed signals (genuinely between archetypes)
+    """
+    if distance < 1.5:
+        return "Strong match"
+    elif distance < 2.5:
+        return "Good match"
+    else:
+        return "Mixed signals — you sit between a couple of archetypes"
+
+
+# ---------------------------------------------------------------------------
+# STEP 4: find the best matching archetype (and runner-up)
 # ---------------------------------------------------------------------------
 
 def find_match(answers):
     """
-    Takes a list of 10 answers, computes axis scores, then finds the archetype
-    with the smallest Euclidean distance to those scores.
+    Takes a list of 10 answers, computes axis scores, ranks all archetypes
+    by Euclidean distance, and returns the winner and runner-up.
 
     Returns a dict with:
-        - name: the archetype name
-        - description: the result description shown to the user
-        - guidance: buying guidance dict
-        - axis_scores: the user's 5 axis scores (useful for debugging)
-        - distance: how close the match was (lower = better)
+        - name:        winner archetype name
+        - description: winner description
+        - guidance:    winner buying guidance dict
+        - distance:    winner distance (lower = better)
+        - confidence:  human-readable confidence label
+        - axis_scores: user's 5 axis scores (used by radar chart)
+        - runner_up:   dict with name, description, guidance for 2nd closest
     """
 
-    # Step 1: turn 10 answers into 5 axis scores
     user_scores = compute_axis_scores(answers)
 
-    # Step 2: find the closest archetype
-    best_name     = None
-    best_distance = float("inf")  # start with infinity so any real distance beats it
+    # Rank all archetypes by distance, closest first
+    ranked = sorted(
+        [
+            (euclidean_distance(user_scores, archetype["profile"]), name)
+            for name, archetype in ARCHETYPES.items()
+        ]
+    )
 
-    for name, archetype in ARCHETYPES.items():
-        distance = euclidean_distance(user_scores, archetype["profile"])
+    best_distance, best_name   = ranked[0]
+    runup_distance, runup_name = ranked[1]
 
-        if distance < best_distance:
-            best_distance = distance
-            best_name     = name
-
-    # Step 3: return the winner with everything needed to display the result
     winner = ARCHETYPES[best_name]
+    runner = ARCHETYPES[runup_name]
 
     return {
         "name":        best_name,
         "description": winner["description"],
         "guidance":    winner["guidance"],
+        "distance":    round(best_distance, 3),
+        "confidence":  get_confidence(best_distance),
         "axis_scores": {
             "roast":           user_scores[0],
             "acidity":         user_scores[1],
@@ -382,43 +551,173 @@ def find_match(answers):
             "body":            user_scores[3],
             "adventurousness": user_scores[4],
         },
-        "distance": round(best_distance, 3),
+        "runner_up": {
+            "name":        runup_name,
+            "description": runner["description"],
+            "guidance":    runner["guidance"],
+            "distance":    round(runup_distance, 3),
+        },
     }
 
 
 # ---------------------------------------------------------------------------
-# QUICK TEST — run this file directly to verify it works
-# python matching.py
+# QUICK TEST
 # ---------------------------------------------------------------------------
 
 def print_result(label, result):
-    """Helper to print a result in a readable format for testing."""
-    g = result["guidance"]
-    print(f"{label}")
-    print(f"  Match:        {result['name']}")
-    print(f"  Distance:     {result['distance']}")
-    print(f"  Axis scores:  {result['axis_scores']}")
-    print(f"  Description:  {result['description'][:80]}...")
-    print(f"  Countries:    {', '.join(g['countries'])}")
-    print(f"  Regions:      {', '.join(g['regions'])}")
-    print(f"  Process:      {', '.join(g['process'])}")
-    print(f"  Varieties:    {', '.join(g['varieties'])}")
-    print(f"  Roast level:  {g['roast_level']}")
-    print(f"  Flavor notes: {', '.join(g['flavor_notes'])}")
-    print(f"  Roasters:     {', '.join(g['roasters'])}")
-    print()
+    print(f"\n{label}")
+    print(f"  Match:      {result['name']} ({result['confidence']})")
+    print(f"  Distance:   {result['distance']}")
+    print(f"  Runner-up:  {result['runner_up']['name']} (distance: {result['runner_up']['distance']})")
+    print(f"  Axis scores: {result['axis_scores']}")
 
 
 if __name__ == "__main__":
+    print_result("Test 1 — light/floral/adventurous:", find_match([-2, -2, +2, +2, +2, +2, -2, -2, +1, +2]))
+    print_result("Test 2 — dark/bold/unadventurous:",  find_match([+2, +2, -2, -2, -2, -2, +2, +2, -2, -2]))
+    print_result("Test 3 — all neutral:",              find_match([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))
 
-    # Test case 1: should match "Bright & Floral Explorer"
-    test_answers_light = [-2, -2, +2, +2, +2, +2, -2, -2, +1, +2]
-    print_result("Test 1 — light/floral/adventurous:", find_match(test_answers_light))
 
-    # Test case 2: should match "Bold Brewer"
-    test_answers_dark = [+2, +2, -2, -2, -2, -2, +2, +2, -2, -2]
-    print_result("Test 2 — dark/bold/unadventurous:", find_match(test_answers_dark))
+# ---------------------------------------------------------------------------
+# COUNTRY PROFILES
+# Tasting descriptions per origin country — shown on the results page
+# when a user gets that country as a recommendation.
+# ---------------------------------------------------------------------------
 
-    # Test case 3: should match "Balanced Curious"
-    test_answers_balanced = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    print_result("Test 3 — all neutral:", find_match(test_answers_balanced))
+COUNTRY_PROFILES = {
+    "Ethiopia": (
+        "The birthplace of coffee. Ethiopian coffees are prized for their complexity — "
+        "especially from Yirgacheffe and Gedeo, where washed coffees produce striking "
+        "floral and citrus notes (jasmine, bergamot, lemon). Naturals from the same "
+        "regions lean toward blueberry and stone fruit. No other origin produces this "
+        "level of aromatic complexity at light roast."
+    ),
+    "Kenya": (
+        "Kenyan coffees are bold and bright — known for a distinctive 'blackcurrant' "
+        "or tomato-like acidity that's unlike any other origin. SL28 and SL34 varieties "
+        "produce intense, wine-like flavors with high acidity and full body. If you love "
+        "brightness and complexity, Kenya consistently delivers."
+    ),
+    "Colombia": (
+        "One of the most versatile and approachable specialty origins. Colombian coffees "
+        "tend toward balanced sweetness — caramel, mild citrus, red apple — with a clean "
+        "finish. Huila and Nariño produce some of the most complex Colombian lots, while "
+        "the country as a whole is reliably consistent across roasters."
+    ),
+    "Costa Rica": (
+        "Costa Rican coffees are clean, sweet, and predictable in the best way — a safe "
+        "bet for anyone who wants quality without surprises. Tarrazu is the most famous "
+        "region, known for bright acidity and clean citrus or honey notes. Honey-process "
+        "Costa Ricans add sweetness and body without the funk of a natural."
+    ),
+    "Guatemala": (
+        "Guatemalan coffees tend toward chocolate, brown sugar, and mild spice — "
+        "approachable and comforting. Antigua and Huehuetenango are the standout regions. "
+        "They roast well at medium to medium-dark, making them popular among people who "
+        "want quality coffee that doesn't taste sour or unusual."
+    ),
+    "Peru": (
+        "Often underrated, Peruvian coffees (especially from Cajamarca) can be elegant "
+        "and nuanced — mild acidity, caramel sweetness, and a clean finish. They're "
+        "rarely the flashiest option but are reliable and food-friendly."
+    ),
+    "Brazil": (
+        "Brazil is the world's largest coffee producer, and its coffees tend toward "
+        "low acidity, full body, and flavors of nuts, chocolate, and brown sugar. "
+        "Sul de Minas and Cerrado are the quality regions. Brazilian naturals are a "
+        "classic base for espresso blends — sweet, heavy, and smooth."
+    ),
+    "Honduras": (
+        "Honduran specialty coffees punch above their reputation — Marcala and Copán "
+        "produce bright, balanced coffees with stone fruit and caramel notes. A good "
+        "value origin that's improving rapidly in quality."
+    ),
+    "Indonesia": (
+        "Indonesian coffees (especially Sumatra) are unlike anything else — earthy, "
+        "herbal, and full-bodied, with a distinctive 'wet earth' or cedar quality from "
+        "the wet-hulling process. Not for everyone, but loved by people who want bold, "
+        "low-acid, heavy coffee that feels nothing like bright specialty fare."
+    ),
+    "Ecuador": (
+        "Ecuador is emerging as an exciting origin, particularly for experimental "
+        "processing. The Pichincha region produces coffees with tropical fruit and "
+        "complex fermented notes. Typica Mejorado and Sidra varieties grown here are "
+        "producing some of the most interesting lots in South America."
+    ),
+    "Panama": (
+        "Home to some of the world's most expensive and celebrated coffees — the "
+        "Gesha variety from Boquete is legendary for its jasmine, bergamot, and "
+        "stone fruit complexity. Panamanian Geshas set the benchmark that other "
+        "floral coffees are measured against."
+    ),
+    "Bolivia": (
+        "A small but high-quality origin producing clean, sweet coffees with mild "
+        "acidity and caramel or stone fruit notes. Similar in profile to Peru — "
+        "underrated and worth seeking out when available."
+    ),
+}
+
+# ---------------------------------------------------------------------------
+# PROCESS PROFILES
+# Plain English explanation of each process — shown when a user's result
+# includes that processing method.
+# ---------------------------------------------------------------------------
+
+PROCESS_PROFILES = {
+    "Washed": (
+        "The coffee fruit (cherry) is removed before the bean is dried, so the bean "
+        "dries clean. This produces transparent, bright flavors where the origin's "
+        "terroir — soil, altitude, variety — comes through clearly. Washed coffees "
+        "tend to taste cleaner, brighter, and more 'coffeelike' in the classic sense. "
+        "If you like clarity and acidity, this is your process."
+    ),
+    "Natural": (
+        "The whole coffee cherry is dried with the fruit still on. As it dries, the "
+        "fruit's sugars ferment into the bean — producing sweeter, fruitier, sometimes "
+        "wine-like flavors. Natural coffees often taste like blueberry, tropical fruit, "
+        "or jam. More body, less acidity than washed. Higher risk of fermentation "
+        "defects, but the best naturals are stunning."
+    ),
+    "Honey": (
+        "A middle ground — the skin is removed but some of the sticky fruit mucilage "
+        "is left on during drying. Produces sweetness and body without the full "
+        "fermented intensity of a natural. 'Yellow honey' has less mucilage (cleaner), "
+        "'black honey' has more (sweeter and heavier). Approachable and crowd-pleasing."
+    ),
+    "Pulped natural": (
+        "Similar to honey process — skin is removed, some mucilage remains during "
+        "drying. Common in Brazil, where it produces chocolatey, nutty, full-bodied "
+        "coffees with low acidity. A classic process for people who want sweetness "
+        "and body without brightness."
+    ),
+    "Anaerobic": (
+        "Coffee ferments in sealed, oxygen-free tanks before drying. The lack of "
+        "oxygen produces unusual flavor compounds — often intense tropical fruit, "
+        "spice, or wine-like notes. Polarizing: some people love the complexity, "
+        "others find it overwhelming or artificial-tasting. If you want funky and "
+        "distinctive, this is your process."
+    ),
+    "Co-fermented": (
+        "Coffee ferments alongside added ingredients — fruit juices, spices, or "
+        "other fermentable materials — to impart additional flavor. Very experimental "
+        "and not universally loved, but produces coffees unlike anything traditional "
+        "processing can achieve. Common in competition-circuit lots."
+    ),
+    "Carbonic maceration": (
+        "Borrowed from winemaking — whole cherries ferment under CO₂ pressure before "
+        "processing. Produces very clean but intensely fruity, almost candy-like "
+        "flavors. A precision process that's gaining popularity among roasters chasing "
+        "distinctive, high-scoring lots."
+    ),
+    "Wet-hulled": (
+        "A process unique to Indonesia (called 'Giling Basah' locally). The parchment "
+        "layer is removed while the bean is still wet, then it dries at lower moisture "
+        "content. This produces the earthy, herbal, full-bodied character Sumatran "
+        "coffees are known for. Not to everyone's taste, but unmistakable."
+    ),
+    "Yellow honey": (
+        "The lightest honey process — only a small amount of mucilage is left on "
+        "during drying. Produces a cleaner cup than other honeys, closer to washed "
+        "but with extra sweetness and a slightly heavier body."
+    ),
+}
