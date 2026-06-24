@@ -181,7 +181,7 @@ def render_radar_chart(axis_scores):
         axis_scores["body"],
         axis_scores["adventurousness"],
     ]
-    display        = [s + 2 for s in scores]  # shift -2→+2 to 0→4 for Plotly
+    display        = [max(s + 2, 0.15) for s in scores]  # shift to 0→4; min 0.15 prevents Plotly fill collapsing to lines when a value hits exactly 0
     display_closed = display + [display[0]]
     axes_closed    = axes   + [axes[0]]
 
@@ -193,6 +193,7 @@ def render_radar_chart(axis_scores):
         fillcolor="rgba(200, 129, 58, 0.25)",
         line=dict(color="#C8813A", width=2),
         marker=dict(color="#C8813A", size=6),
+        hoverinfo="skip",  # disables the r/theta tooltip on hover
     ))
     fig.update_layout(
         polar=dict(
@@ -221,40 +222,64 @@ def render_radar_chart(axis_scores):
     st.plotly_chart(fig, use_container_width=True)
 
 
-def render_radar_legend():
+def render_radar_legend(axis_scores):
     """
-    A simple table below the radar chart showing what low and high
-    means for each axis — cleaner than cramming labels into the chart.
+    Renders the axis legend using Streamlit columns instead of raw HTML tables
+    to avoid Streamlit's f-string HTML rendering bug.
+
+    Shows three columns per row: Axis | Range | Your preference
     """
-    st.markdown("""
-    <table class="legend-table">
-        <tr>
-            <td>Roast</td>
-            <td>← Low = Light roast</td>
-            <td>High = Dark roast →</td>
-        </tr>
-        <tr>
-            <td>Acidity</td>
-            <td>← Low = Smooth</td>
-            <td>High = Bright & tangy →</td>
-        </tr>
-        <tr>
-            <td>Flavor</td>
-            <td>← Low = Chocolate/nutty</td>
-            <td>High = Fruity/floral →</td>
-        </tr>
-        <tr>
-            <td>Body</td>
-            <td>← Low = Light, tea-like</td>
-            <td>High = Heavy, syrupy →</td>
-        </tr>
-        <tr>
-            <td>Adventurousness</td>
-            <td>← Low = Classic</td>
-            <td>High = Funky & experimental →</td>
-        </tr>
-    </table>
-    """, unsafe_allow_html=True)
+    axes = [
+        ("Roast",           "roast",           "Light roast",     "Dark roast"),
+        ("Acidity",         "acidity",         "Smooth",          "Bright & tangy"),
+        ("Flavor",          "flavor",          "Chocolate/nutty", "Fruity/floral"),
+        ("Body",            "body",            "Light, tea-like", "Heavy, syrupy"),
+        ("Adventurousness", "adventurousness", "Classic",         "Funky & experimental"),
+    ]
+
+    # Header row
+    col1, col2, col3 = st.columns([2, 3, 3])
+    col1.markdown("<span style='color:#C8813A; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;'>Axis</span>", unsafe_allow_html=True)
+    col2.markdown("<span style='color:#C8813A; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;'>Range</span>", unsafe_allow_html=True)
+    col3.markdown("<span style='color:#C8813A; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;'>Your preference</span>", unsafe_allow_html=True)
+
+    st.markdown("<hr style='border:none; border-top:1px solid #3A2A1A; margin: 0.2rem 0 0.4rem 0;'>", unsafe_allow_html=True)
+
+    # Data rows
+    for label, key, low, high in axes:
+        preference = axis_to_english(key, axis_scores[key])
+        col1, col2, col3 = st.columns([2, 3, 3])
+        col1.markdown(f"<span style='color:#F5ECD7; font-size:0.85rem;'>{label}</span>", unsafe_allow_html=True)
+        col2.markdown(f"<span style='color:#9A8070; font-size:0.82rem;'>{low} → {high}</span>", unsafe_allow_html=True)
+        col3.markdown(f"<span style='color:#C8A882; font-size:0.82rem;'>{preference}</span>", unsafe_allow_html=True)
+
+    st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
+
+
+def render_context_item(name, description, category="variety"):
+    """
+    Renders a context item as a single expander with a category-specific label.
+
+    Label format per category:
+      - country:  "What Ethiopian coffee tastes like"
+      - region:   "What Yirgacheffe is known for"
+      - process:  "How washed processing works"
+      - variety:  "About the Ethiopian Heirloom"
+    """
+    if category == "country":
+        label = f"What {name} coffee tastes like"
+    elif category == "region":
+        label = f"What {name} is known for"
+    elif category == "process":
+        label = f"How {name.lower()} processing works"
+    else:  # variety
+        label = f"About the {name}"
+
+    with st.expander(label):
+        st.markdown(
+            f'<div class="context-desc" style="padding-left:0">{description}</div>',
+            unsafe_allow_html=True
+        )
 
 
 def render_guidance_cards(guidance, show_context=True):
@@ -282,57 +307,41 @@ def render_guidance_cards(guidance, show_context=True):
     # Countries card
     card("Countries", guidance["countries"])
 
-    # Per-country context — one st.markdown call per country (avoids rendering bug)
+    # Per-country context
     if show_context:
         for country in guidance["countries"]:
             if country in COUNTRY_PROFILES:
-                st.markdown(
-                    f'<div class="context-name">{country}</div>'
-                    f'<div class="context-desc">{COUNTRY_PROFILES[country]}</div>',
-                    unsafe_allow_html=True
-                )
+                render_context_item(country, COUNTRY_PROFILES[country], "country")
         st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
 
     # Regions card
     card("Regions", guidance["regions"])
 
-    # Per-region context — one st.markdown call per region
+    # Per-region context
     if show_context:
         for region in guidance["regions"]:
             if region in REGION_PROFILES:
-                st.markdown(
-                    f'<div class="context-name">{region}</div>'
-                    f'<div class="context-desc">{REGION_PROFILES[region]}</div>',
-                    unsafe_allow_html=True
-                )
+                render_context_item(region, REGION_PROFILES[region], "region")
         st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
 
     # Process card
     card("Process", guidance["process"])
 
-    # Per-process context — one st.markdown call per process
+    # Per-process context
     if show_context:
         for process in guidance["process"]:
             if process in PROCESS_PROFILES:
-                st.markdown(
-                    f'<div class="context-name">{process}</div>'
-                    f'<div class="context-desc">{PROCESS_PROFILES[process]}</div>',
-                    unsafe_allow_html=True
-                )
+                render_context_item(process, PROCESS_PROFILES[process], "process")
         st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
 
     # Varieties card
     card("Varieties", guidance["varieties"], "varieties")
 
-    # Per-variety context — one st.markdown call per variety
+    # Per-variety context
     if show_context:
         for variety in guidance["varieties"]:
             if variety in VARIETY_PROFILES:
-                st.markdown(
-                    f'<div class="context-name">{variety}</div>'
-                    f'<div class="context-desc">{VARIETY_PROFILES[variety]}</div>',
-                    unsafe_allow_html=True
-                )
+                render_context_item(variety, VARIETY_PROFILES[variety], "variety")
         st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
 
     card("Roast level",                   guidance["roast_level"],  "roast_level")
@@ -468,7 +477,7 @@ def show_results():
     # Radar chart + legend table
     st.caption("The shape below shows the same profile visually.")
     render_radar_chart(result["axis_scores"])
-    render_radar_legend()
+    render_radar_legend(result["axis_scores"])
 
     # Full buying guidance
     st.markdown("### What to look for when buying")
