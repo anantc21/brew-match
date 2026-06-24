@@ -431,6 +431,121 @@ VARIETY_PROFILES = {
     ),
 }
 
+
+# ---------------------------------------------------------------------------
+# REGION PROFILES
+# Descriptions of specific growing regions mentioned across the archetypes.
+# Shown on the results page when a user receives that region as a recommendation.
+# ---------------------------------------------------------------------------
+
+REGION_PROFILES = {
+    "Yirgacheffe": (
+        "A small but legendary zone within Ethiopia's Gedeo zone. Yirgacheffe "
+        "produces some of the world's most prized washed coffees — intensely floral, "
+        "with jasmine, bergamot, and citrus notes that are unlike anything from "
+        "other origins. High altitude and heirloom varieties are the key factors."
+    ),
+    "Gedeo": (
+        "A broader zone in southern Ethiopia that includes Yirgacheffe. Gedeo "
+        "coffees share the same floral, citrus-driven character but can vary more "
+        "widely in style. Both washed and natural lots are produced here, and it's "
+        "one of the most biodiverse coffee-growing areas in the world."
+    ),
+    "Nyeri": (
+        "One of Kenya's most celebrated coffee regions, located on the slopes of "
+        "Mount Kenya. Nyeri coffees are known for intense blackcurrant, tomato, "
+        "and red fruit notes with high acidity and full body. The combination of "
+        "red volcanic soil, altitude, and SL28/SL34 varieties makes Nyeri "
+        "consistently exceptional."
+    ),
+    "Kirinyaga": (
+        "A Kenyan region neighboring Nyeri, also on Mount Kenya's slopes. Kirinyaga "
+        "produces similarly bright, complex coffees with blackcurrant and citrus "
+        "character. Slightly less well-known than Nyeri but equally high quality — "
+        "a region worth seeking out."
+    ),
+    "Huila": (
+        "Colombia's most celebrated coffee department, located in the Andes in "
+        "southwestern Colombia. Huila's high altitude, diverse microclimates, and "
+        "small farmer culture produce some of the country's most complex and "
+        "sought-after lots — caramel sweetness, bright citrus, and clean finish. "
+        "Many award-winning Colombian coffees come from here."
+    ),
+    "Nariño": (
+        "A Colombian department bordering Ecuador, with some of the highest-altitude "
+        "coffee farms in the country. The extreme altitude slows cherry development, "
+        "producing dense beans with high acidity, bright citrus, and exceptional "
+        "sweetness. Nariño coffees are often described as some of the most "
+        "elegant and refined in Colombia."
+    ),
+    "Tarrazu": (
+        "Costa Rica's most famous coffee region, located in the mountains south of "
+        "San José. Tarrazu coffees are known for their clean brightness, citrus "
+        "acidity, and honey sweetness. The high altitude and volcanic soil produce "
+        "dense, well-structured beans that roast beautifully at light to medium levels."
+    ),
+    "Antigua": (
+        "A historic coffee-growing valley in Guatemala, surrounded by three volcanoes. "
+        "Antigua coffees are known for their full body, chocolate and spice notes, "
+        "and mild acidity — a classic Central American profile. The volcanic ash soil "
+        "contributes to the region's distinctive character."
+    ),
+    "Cajamarca": (
+        "Peru's most recognized specialty coffee region, located in the northern "
+        "Andes. Cajamarca produces clean, sweet coffees with mild acidity and "
+        "caramel or stone fruit notes. The region is home to many small-scale "
+        "farmers and cooperatives producing increasingly high-quality lots."
+    ),
+    "Sul de Minas": (
+        "One of Brazil's most important specialty coffee regions, located in "
+        "Minas Gerais state. Sul de Minas coffees are known for their sweetness, "
+        "full body, and chocolate or nutty notes — the classic Brazilian profile. "
+        "The region produces large volumes and is the backbone of many espresso "
+        "blends worldwide."
+    ),
+    "Cerrado": (
+        "A Brazilian region in Minas Gerais state with a distinct dry season that "
+        "allows for very consistent, uniform harvests. Cerrado coffees are "
+        "full-bodied, sweet, and low-acid — chocolatey and smooth, well-suited "
+        "to medium-dark roasting and espresso preparation."
+    ),
+    "Marcala": (
+        "A denomination of origin in Honduras's La Paz department — the first "
+        "in Central America to receive geographic indication status. Marcala "
+        "coffees are grown at high altitude and produce bright, balanced cups "
+        "with stone fruit and caramel notes. A rising region in specialty coffee."
+    ),
+    "Pichincha": (
+        "A province in Ecuador surrounding Quito, producing some of Ecuador's "
+        "most exciting specialty lots. The high altitude and proximity to the "
+        "equator create ideal conditions for slow cherry development. Pichincha "
+        "is associated with experimental processing and rare varieties like "
+        "Sidra and Typica Mejorado."
+    ),
+    "Sumatra (Mandheling, Gayo)": (
+        "Two of Sumatra's most important coffee-producing areas. Mandheling "
+        "(in North Sumatra) is known for earthy, full-bodied, low-acid coffees "
+        "with herbal and cedar notes — the classic Sumatran profile. Gayo "
+        "(in Aceh province) produces similar coffees but often slightly cleaner "
+        "and more complex. Both use the wet-hulling process that defines "
+        "Indonesian coffee."
+    ),
+    "Sumatra (Mandheling)": (
+        "Located in North Sumatra, Mandheling is the origin most associated with "
+        "the classic Sumatran flavor profile — earthy, herbal, full-bodied, and "
+        "low-acid, with cedar and dark chocolate notes. The wet-hulling process "
+        "used here is unique to Indonesia and produces the region's distinctive "
+        "rustic, heavy character."
+    ),
+    "Sulawesi": (
+        "An Indonesian island producing coffees with a similar profile to Sumatra — "
+        "full body, low acidity, earthy and spicy notes — but often considered "
+        "slightly cleaner and more refined. The Toraja and Kalosi regions within "
+        "Sulawesi are the most recognized. Good for dark roast lovers who want "
+        "body and sweetness without harsh bitterness."
+    ),
+}
+
 # ---------------------------------------------------------------------------
 # STEP 1: compute axis scores from 10 answers
 # ---------------------------------------------------------------------------

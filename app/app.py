@@ -17,7 +17,7 @@ import plotly.graph_objects as go
 sys.path.append(os.path.dirname(__file__))
 from matching import (
     find_match, QUESTIONS, GLOSSARY,
-    COUNTRY_PROFILES, PROCESS_PROFILES, VARIETY_PROFILES
+    COUNTRY_PROFILES, PROCESS_PROFILES, VARIETY_PROFILES, REGION_PROFILES
 )
 
 # ---------------------------------------------------------------------------
@@ -293,7 +293,19 @@ def render_guidance_cards(guidance, show_context=True):
                 )
         st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
 
-    card("Regions",   guidance["regions"],   "regions")
+    # Regions card
+    card("Regions", guidance["regions"])
+
+    # Per-region context — one st.markdown call per region
+    if show_context:
+        for region in guidance["regions"]:
+            if region in REGION_PROFILES:
+                st.markdown(
+                    f'<div class="context-name">{region}</div>'
+                    f'<div class="context-desc">{REGION_PROFILES[region]}</div>',
+                    unsafe_allow_html=True
+                )
+        st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
 
     # Process card
     card("Process", guidance["process"])
