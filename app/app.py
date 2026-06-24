@@ -39,7 +39,7 @@ st.markdown("""
     .stApp { background-color: #1C1410; color: #F5ECD7; font-family: 'Georgia', serif; }
     .block-container { max-width: 680px; padding-top: 3rem; padding-bottom: 3rem; }
     header, footer { visibility: hidden; }
-    .stProgress > div > div { background-color: #C8813A; }
+
     .stRadio label { color: #F5ECD7 !important; font-size: 1rem; }
     .stButton > button {
         background-color: #C8813A; color: #1C1410; border: none;
@@ -219,7 +219,7 @@ def render_radar_chart(axis_scores):
         margin=dict(t=40, b=40, l=60, r=60),
         height=380,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False, 'staticPlot': True})
 
 
 def render_radar_legend(axis_scores):
@@ -413,7 +413,12 @@ def show_quiz():
     q_index = st.session_state.question
     q       = QUESTIONS[q_index]
 
-    st.progress(q_index / len(QUESTIONS))
+    pct = int((q_index / len(QUESTIONS)) * 100)
+    st.markdown(f"""
+    <div style="background-color:#2A1F16; border-radius:4px; height:8px; margin-bottom:0.5rem;">
+        <div style="background-color:#C8813A; width:{pct}%; height:8px; border-radius:4px;"></div>
+    </div>
+    """, unsafe_allow_html=True)
     st.caption(f"Question {q_index + 1} of {len(QUESTIONS)}")
     st.markdown(f"### {q['text']}")
     st.markdown("")
