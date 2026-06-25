@@ -459,6 +459,70 @@ def show_quiz():
 
 
 # ---------------------------------------------------------------------------
+# EXPLANATION GENERATOR
+# ---------------------------------------------------------------------------
+
+def generate_explanation(axis_scores, archetype_name):
+    """
+    Generates a plain-English explanation of why the user got this archetype.
+    Finds the 2-3 most extreme axes (furthest from 0) and maps them to
+    natural language signals that connect to the archetype.
+    """
+    axis_signals = {
+        "roast": {
+            "negative": "a clear preference for light, delicate roasts",
+            "positive": "a strong preference for bold, dark roasts",
+        },
+        "acidity": {
+            "negative": "a preference for smooth, low-acid coffee",
+            "positive": "a love of bright, tangy acidity",
+        },
+        "flavor": {
+            "negative": "a preference for chocolatey, nutty flavors",
+            "positive": "a pull toward fruity and floral flavors",
+        },
+        "body": {
+            "negative": "a preference for light, tea-like body",
+            "positive": "a preference for heavy, full-bodied coffee",
+        },
+        "adventurousness": {
+            "negative": "a preference for familiar, classic coffees",
+            "positive": "an openness to unusual and experimental coffees",
+        },
+    }
+
+    # Sort axes by how extreme they are (furthest from 0 first)
+    sorted_axes = sorted(
+        axis_scores.items(),
+        key=lambda x: abs(x[1]),
+        reverse=True
+    )
+
+    # Build signal phrases for the top 2-3 most extreme axes
+    signals = []
+    for axis, score in sorted_axes[:3]:
+        if abs(score) < 0.5:
+            continue  # skip near-neutral axes — they don't explain much
+        direction = "positive" if score > 0 else "negative"
+        signals.append(axis_signals[axis][direction])
+
+    if not signals:
+        return f"Your answers were broadly balanced, landing you closest to the {archetype_name}."
+
+    if len(signals) == 1:
+        signal_str = signals[0]
+    elif len(signals) == 2:
+        signal_str = f"{signals[0]} and {signals[1]}"
+    else:
+        signal_str = f"{signals[0]}, {signals[1]}, and {signals[2]}"
+
+    return (
+        f"Your answers showed {signal_str} — "
+        f"the clearest signal pointing toward the {archetype_name}."
+    )
+
+
+# ---------------------------------------------------------------------------
 # PAGE 3: RESULTS
 # ---------------------------------------------------------------------------
 
@@ -474,6 +538,26 @@ def show_results():
     )
     st.markdown(result["description"])
 
+    # Why you got this result
+    explanation = generate_explanation(result["axis_scores"], result["name"])
+    st.markdown(
+        f'<div class="result-card" style="margin-top:0.8rem;">' +
+        f'<div class="result-label">Why you got this result</div>' +
+        f'<div style="color:#C8A882; font-size:0.9rem; line-height:1.6;">{explanation}</div>' +
+        f'</div>',
+        unsafe_allow_html=True
+    )
+
+    # What to say to a barista
+    st.markdown(
+        f'<div class="result-card">' +
+        f'<div class="result-label">What to say to a barista</div>' +
+        f'<div style="font-style:italic; color:#F5ECD7; font-size:0.95rem;">&ldquo;{result["barista_line"]}&rdquo;</div>' +
+        f'<div class="glossary-note">Walk into any specialty coffee shop and say this.</div>' +
+        f'</div>',
+        unsafe_allow_html=True
+    )
+
     # Plain-English fingerprint
     st.markdown("### Your taste profile")
     st.caption("Here's what your answers say about your preferences — in plain English.")
@@ -487,6 +571,38 @@ def show_results():
     # Full buying guidance
     st.markdown("### What to look for when buying")
     render_guidance_cards(g, show_context=True)
+
+    # Brewing guidance
+    st.markdown("### How to brew it at home")
+    brewing = result["brewing"]
+    st.markdown(
+        f'<div class="result-card">' +
+        f'<div class="result-label">Recommended methods</div>' +
+        f'<div>{", ".join(brewing["methods"])}</div>' +
+        f'</div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        f'<div class="result-card">' +
+        f'<div class="result-label">Water temperature</div>' +
+        f'<div>{brewing["temp"]}</div>' +
+        f'</div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        f'<div class="result-card">' +
+        f'<div class="result-label">Grind size</div>' +
+        f'<div>{brewing["grind"]}</div>' +
+        f'</div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        f'<div class="result-card">' +
+        f'<div class="result-label">Key tip</div>' +
+        f'<div style="color:#C8A882; font-size:0.9rem; line-height:1.6;">{brewing["tip"]}</div>' +
+        f'</div>',
+        unsafe_allow_html=True
+    )
 
     # Compact runner-up
     st.markdown("### Also worth exploring")

@@ -84,14 +84,14 @@ QUESTIONS = [
         ],
     },
     {
-        "text": "Sweet treat pairing — pick one:",
+        "text": "When you add flavor to something (yogurt, oatmeal, a smoothie), what do you usually reach for?",
         "axis": "flavor",
         "options": [
-            ("Fresh berry tart", 2),
-            ("Citrus tart", 1),
-            ("Caramel flan", 0),
-            ("Spiced cookie", -1),
-            ("Brownie", -2),
+            ("Berries or citrus", 2),
+            ("Stone fruit like peach or apricot", 1),
+            ("Vanilla or maple", 0),
+            ("Caramel or honey", -1),
+            ("Chocolate or nuts", -2),
         ],
     },
     {
@@ -106,14 +106,14 @@ QUESTIONS = [
         ],
     },
     {
-        "text": "Milk or no milk, normally?",
+        "text": "Which texture do you prefer in food and drink generally?",
         "axis": "body",
         "options": [
-            ("Black, nothing added", -2),
-            ("Just a splash sometimes", -1),
-            ("A little milk regularly", 0),
-            ("Regular milk or cream", 1),
-            ("Latte or cream-heavy", 2),
+            ("Light and delicate — nothing too heavy", -2),
+            ("Mostly light, occasionally something richer", -1),
+            ("No strong preference either way", 0),
+            ("I like some richness and weight", 1),
+            ("Rich and full — the heavier the better", 2),
         ],
     },
     {
@@ -131,8 +131,8 @@ QUESTIONS = [
         "text": "Have you ever intentionally ordered a coffee that sounded weird or unfamiliar?",
         "axis": "adventurousness",
         "options": [
-            ("No, and I wouldn't", -2),
-            ("No, probably wouldn't", -1),
+            ("No, and I don't think I would", -2),
+            ("No, I tend to stick to what I know", -1),
             ("Maybe once or twice", 0),
             ("Yes, a few times", 1),
             ("Yes, regularly — that's half the fun", 2),
@@ -144,16 +144,16 @@ QUESTIONS = [
 # ---------------------------------------------------------------------------
 # ARCHETYPES
 # Each archetype has:
-#   - profile: list of 5 axis scores [roast, acidity, flavor, body, adventurousness]
-#   - description: shown to the user as their result
-#   - guidance: structured buying recommendations with the following fields:
-#       - countries:    specific countries to look for
-#       - regions:      notable growing regions within those countries
-#       - process:      processing methods that suit this archetype
-#       - varieties:    coffee varieties/cultivars to look for on the bag
-#       - roast_level:  roast level range
-#       - flavor_notes: tasting notes to look for
-#       - roasters:     roasters known for this style (easy to expand — just add to the list)
+#   - profile:      list of 5 axis scores [roast, acidity, flavor, body, adventurousness]
+#   - description:  shown to the user as their result
+#   - barista_line: what to say to a barista to get a coffee in this style
+#   - brewing:      how to brew this style at home
+#       - methods:  recommended brew methods
+#       - temp:     water temperature
+#       - grind:    grind size direction
+#       - tip:      one key brewing tip
+#   - guidance:     structured buying recommendations
+#       - countries, regions, process, varieties, roast_level, flavor_notes, roasters
 # ---------------------------------------------------------------------------
 
 ARCHETYPES = {
@@ -164,6 +164,20 @@ ARCHETYPES = {
             "tea meets fresh citrus. You want brightness, not bitterness, and you're open to "
             "coffees that surprise you."
         ),
+        "barista_line": (
+            "I'm looking for a washed Ethiopian or Kenyan, light roast — "
+            "anything floral or citrusy."
+        ),
+        "brewing": {
+            "methods":  ["V60", "Chemex", "AeroPress"],
+            "temp":     "93–96°C (200–205°F)",
+            "grind":    "Medium-fine",
+            "tip":      (
+                "Use a slow, controlled pour and a longer bloom (45–50 seconds) to "
+                "preserve delicate floral and citrus notes. These coffees open up as "
+                "they cool — don't rush through the cup."
+            ),
+        },
         "guidance": {
             "countries":    ["Ethiopia", "Kenya", "Colombia"],
             "regions":      ["Yirgacheffe", "Gedeo", "Nyeri", "Kirinyaga", "Huila"],
@@ -180,6 +194,20 @@ ARCHETYPES = {
             "You're not just open to unusual coffee — you actively seek it out. Tropical fruit, "
             "wine-like complexity, and fermented funk are features, not bugs."
         ),
+        "barista_line": (
+            "Do you have any naturals or anaerobics? I love tropical fruit "
+            "and funky fermented complexity."
+        ),
+        "brewing": {
+            "methods":  ["V60", "AeroPress"],
+            "temp":     "90–93°C (194–200°F)",
+            "grind":    "Medium-fine",
+            "tip":      (
+                "Try brewing slightly cooler than usual — lower temp tames the fermented "
+                "intensity and keeps tropical fruit notes vibrant rather than overwhelming. "
+                "A shorter brew time also helps."
+            ),
+        },
         "guidance": {
             "countries":    ["Ethiopia", "Colombia", "Ecuador", "Panama"],
             "regions":      ["Gedeo", "Huila", "Nariño", "Pichincha"],
@@ -197,6 +225,20 @@ ARCHETYPES = {
             "cleanly roasted coffee from a reliable origin is your sweet spot — no drama, just "
             "good coffee."
         ),
+        "barista_line": (
+            "I'd love a washed Colombian or Costa Rican, light to medium roast — "
+            "something balanced and clean."
+        ),
+        "brewing": {
+            "methods":  ["V60", "Chemex", "Drip"],
+            "temp":     "93–95°C (200–203°F)",
+            "grind":    "Medium",
+            "tip":      (
+                "These coffees are forgiving and consistent — great for dialing in "
+                "your technique. A standard 1:15 or 1:16 ratio works well. "
+                "Any pour-over method will serve you well here."
+            ),
+        },
         "guidance": {
             "countries":    ["Colombia", "Costa Rica", "Guatemala", "Peru"],
             "regions":      ["Huila", "Nariño", "Tarrazu", "Antigua", "Cajamarca"],
@@ -214,6 +256,20 @@ ARCHETYPES = {
             "seeking the unusual but not avoiding it either. A great starting point for "
             "exploring specialty coffee."
         ),
+        "barista_line": (
+            "I'm open to anything — maybe a medium roast single origin? "
+            "Something approachable and not too polarizing."
+        ),
+        "brewing": {
+            "methods":  ["Drip", "French Press", "V60"],
+            "temp":     "93°C (200°F)",
+            "grind":    "Medium",
+            "tip":      (
+                "Start with whatever equipment you already have. A medium grind, "
+                "standard 1:15 ratio, and 93°C water will get you a great result "
+                "without needing to dial anything in carefully."
+            ),
+        },
         "guidance": {
             "countries":    ["Colombia", "Brazil", "Peru", "Honduras"],
             "regions":      ["Huila", "Sul de Minas", "Cajamarca", "Marcala"],
@@ -230,6 +286,20 @@ ARCHETYPES = {
             "You want your coffee to feel comfortable — not sour, not thin, not weird. "
             "Sweetness, body, and smoothness matter more to you than brightness or complexity."
         ),
+        "barista_line": (
+            "Any honey-process coffees? I prefer something sweet and smooth, "
+            "medium roast, not too acidic."
+        ),
+        "brewing": {
+            "methods":  ["French Press", "AeroPress", "Drip"],
+            "temp":     "91–93°C (196–200°F)",
+            "grind":    "Medium-coarse (French Press) or medium (AeroPress/drip)",
+            "tip":      (
+                "Full immersion methods like French Press complement the sweetness "
+                "and body of honey-process coffees. Let it steep 4 minutes before "
+                "pressing slowly. Avoid over-filtering — you want some texture."
+            ),
+        },
         "guidance": {
             "countries":    ["Brazil", "Costa Rica", "Peru", "Bolivia"],
             "regions":      ["Sul de Minas", "Cerrado", "Tarrazu", "Cajamarca"],
@@ -246,6 +316,20 @@ ARCHETYPES = {
             "Coffee should be warm, familiar, and comforting. You're not looking for brightness "
             "or complexity — you want something rich, sweet, and reliable that feels like home."
         ),
+        "barista_line": (
+            "I like something warm and comforting — medium-dark roast, "
+            "chocolatey, low acidity. Nothing too bright or unusual."
+        ),
+        "brewing": {
+            "methods":  ["French Press", "Drip", "Moka Pot"],
+            "temp":     "91–93°C (196–200°F)",
+            "grind":    "Medium-coarse",
+            "tip":      (
+                "French Press is ideal — it brings out the full body and chocolate "
+                "notes these coffees are known for. Don't press too hard or too fast. "
+                "A moka pot also works beautifully for a bolder, espresso-adjacent result."
+            ),
+        },
         "guidance": {
             "countries":    ["Indonesia", "Brazil", "Guatemala"],
             "regions":      ["Sumatra (Mandheling, Gayo)", "Sul de Minas", "Antigua"],
@@ -262,6 +346,21 @@ ARCHETYPES = {
             "You want your coffee to mean business — bold, heavy, and unapologetically dark. "
             "Nothing delicate, nothing sour. Works great with milk if you drink it that way."
         ),
+        "barista_line": (
+            "I want something bold and dark — full body, low acidity, dark roast. "
+            "Espresso roast is great too, especially if it works with milk."
+        ),
+        "brewing": {
+            "methods":  ["French Press", "Espresso", "Moka Pot"],
+            "temp":     "91–93°C (196–200°F)",
+            "grind":    "Coarse (French Press) / Fine (espresso) / Medium-fine (moka pot)",
+            "tip":      (
+                "Dark roasts extract quickly — use a slightly coarser grind and "
+                "shorter brew time than you'd expect to avoid bitterness. "
+                "If you drink it with milk, espresso or moka pot gives you the "
+                "intensity to cut through."
+            ),
+        },
         "guidance": {
             "countries":    ["Indonesia", "Brazil", "blends"],
             "regions":      ["Sumatra (Mandheling)", "Sulawesi", "Cerrado"],
@@ -654,11 +753,13 @@ def find_match(answers):
     runner = ARCHETYPES[runup_name]
 
     return {
-        "name":        best_name,
-        "description": winner["description"],
-        "guidance":    winner["guidance"],
-        "distance":    round(best_distance, 3),
-        "confidence":  get_confidence(best_distance),
+        "name":         best_name,
+        "description":  winner["description"],
+        "barista_line": winner["barista_line"],
+        "brewing":      winner["brewing"],
+        "guidance":     winner["guidance"],
+        "distance":     round(best_distance, 3),
+        "confidence":   get_confidence(best_distance),
         "axis_scores": {
             "roast":           user_scores[0],
             "acidity":         user_scores[1],
